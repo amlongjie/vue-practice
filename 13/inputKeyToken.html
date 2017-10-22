@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+
+<h1>key令牌解决表单值混乱问题</h1>
+<hr>
+
+<div id="app">
+
+    <h2>如果没有key,则会公用一个input.导致切换之后值还在</h2>
+    <template v-if="regType == 'mail'">
+        邮箱: <input type="text" key="mail">
+    </template>
+
+    <template v-if="regType == 'phone'">
+        手机: <input type="text" key="phone">
+    </template>
+
+    <br>
+    <input type="radio" value="mail" v-model="regType"> 邮箱注册
+    <input type="radio" value="phone" v-model="regType"> 手机注册
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+            regType : "mail"
+        }
+    });
+</script>
+</body>
+</html>

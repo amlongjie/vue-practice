@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+
+<h1>v-for和computed结合</h1>
+<hr>
+
+<div id="app">
+    <h2>选择展示奇数或偶数</h2>
+    {{ numType }}
+    <input type="radio" v-model="numType" value="1">奇数
+    <input type="radio" v-model="numType" value="0">偶数
+    <ul>
+        <li v-for="num in filteredNum">
+            {{ num }}
+        </li>
+    </ul>
+
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        computed:{
+            filteredNum(){
+                if(this.numType === -1)
+                    return this.nums;
+                return this.nums.filter((v) => v % 2 === this.numType * 1);
+            }
+        },
+        data: {
+            numType: -1,
+            nums: [1,2,3,4,5,6,7,8,9,10]
+        }
+    });
+</script>
+</body>
+</html>

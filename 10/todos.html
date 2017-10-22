@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+
+<h1>todos</h1>
+<hr>
+
+<style>
+    .green{color:green}
+    .red{color:red;}
+</style>
+
+
+
+<div id="app">
+    <li v-for="v in todos">
+        <span v-text="v.thing" :class="v.status ? 'green' : 'red'"></span>
+        <button type="button" v-if="v.status" @click="v.status = !v.status">删除</button>
+        <button type="button" v-if="!v.status" @click="v.status= !v.status">恢复</button>
+    </li>
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+            todos:[
+                {thing: "todo01", status: true},
+            ]
+        }
+    });
+</script>
+</body>
+</html>

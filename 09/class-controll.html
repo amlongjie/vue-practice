@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+
+<h1>使用Object和array控制class</h1>
+<hr>
+
+<style>
+    .green{color:green}
+    .color{color:red;}
+    .font{font-size: 80px}
+</style>
+<div id="app">
+
+    <h2 class="green" :class="{color:false, font:true}">原样式保留,后续样式覆盖</h2>
+    <h2 class="green" :class="hd">原样式保留,后续样式覆盖</h2>
+
+    <hr>
+
+    <h2 :class="['color']">使用数组进行样式设置</h2>
+    <h2 :class="[myStyle]">使用数组进行样式设置</h2>
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+            hd: {color:true, font:false},
+            myStyle: ['font']
+        }
+    });
+</script>
+</body>
+</html>

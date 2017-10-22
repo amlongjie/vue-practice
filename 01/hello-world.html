@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+<style>
+    .red{
+        color:red
+    }
+
+    .hv{
+        color:green
+    }
+</style>
+
+{{ message}} <b>==> 超出作用域不会渲染</b>
+
+<div id="app">
+
+    {{ message }} ==> 作用域内会渲染
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+            message: 'hello vue'
+        }
+    });
+</script>
+</body>
+</html>

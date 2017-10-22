@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+
+<h1>v-if 接受协议</h1>
+<hr>
+
+<div id="app">
+    <h2>例子一</h2>
+    {{ copyright }} <br>
+    <input type="checkbox" v-model="copyright" > 接收协议 <br>
+    <span v-if="!copyright">请先接受协议</span> <br>
+    <button v-if="copyright">注册</button>
+
+    <h2>例子二</h2>
+    <input type="text" v-model="age" >  <br>
+    <span v-if="age < 6"> 小孩</span>
+    <span v-else-if="age < 14"> 青少年 </span>
+    <span v-else> 大人 </span>
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+            copyright: false,
+            age:0
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+    <script src="../node_modules/lodash/lodash.js"></script>
+</head>
+<body>
+
+<h1>lodash减少watch对后台请求的压力</h1>
+<hr>
+
+
+<div id="app">
+
+    <input type="text" v-model="word"><br>
+    {{ changeLog }}
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        watch: {
+            // 3S发一次请求
+            word: _.debounce(function (newV, oldV) {
+                this.changeLog = oldV + "=>" + newV
+            }, 3000)
+        },
+        data: {
+            word: '',
+            changeLog:''
+        }
+    });
+</script>
+</body>
+</html>

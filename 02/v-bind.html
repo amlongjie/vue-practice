@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+<style>
+    .red{
+        color:red
+    }
+
+    .hv{
+        color:green
+    }
+</style>
+
+<h1>v-bind</h1>
+
+<div id="app">
+
+
+    <h2>hv是变量.不是字符串</h2>
+
+    <span v-bind:class="hv">v-bind:class="hv"</span>
+
+    <h2>使用引号引起来,才是字符串</h2>
+    <span v-bind:class="'hv'">v-bind:class="'hv'"</span>
+
+    <h2>v-bind可以省略</h2>
+    <span :class="hv">:class = 'hv'</span>
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+            hv: 'red'
+        }
+    });
+</script>
+</body>
+</html>

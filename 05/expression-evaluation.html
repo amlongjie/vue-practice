@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+
+<style>
+    .hd1{color:red;}
+    .hd2{color:green;}
+</style>
+
+<h1>表达式求值</h1>
+
+<hr>
+
+<div id="app">
+
+    n + 1 = {{ n + 1}}
+
+    <h1 :class="'hd' + n">'hd' + n 的结果来选择style</h1>
+    <input v-model="n">
+    <br>
+    <input type="radio" v-model="n" value="1"> 红
+    <input type="radio" v-model="n" value="2"> 绿
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+            n : 1
+        }
+    });
+</script>
+</body>
+</html>

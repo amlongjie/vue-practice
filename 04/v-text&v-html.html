@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+
+<h1>v-text & v-html</h1>
+
+<hr>
+
+<div id="app">
+
+    <h2>v-text会转义后输出message的内容</h2>
+    <h4 v-text="message"></h4>
+
+    <h2>v-html会解析成html格式进行输出</h2>
+    <h4 v-html="message"></h4>
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+            message: '<h2 style="color:red">hello vue</h2>'
+        }
+    });
+</script>
+</body>
+</html>

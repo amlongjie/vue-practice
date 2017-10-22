@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+
+<h1>v-for</h1>
+<hr>
+
+<div id="app">
+    <h2>例子一</h2>
+    <table border="1">
+        <tr>
+            <th>序号</th>
+            <th>编号</th>
+            <th>标题</th>
+        </tr>
+        <tr v-for="(n,index) in news">
+            <td>{{ index + 1 }}</td>
+            <td>{{ n.id }}</td>
+            <td>{{ n.title }} </td>
+        </tr>
+    </table>
+    <hr>
+    <h2>例子二</h2>
+    <ul>
+        <li v-for="v in 20">
+            {{ v }}
+        </li>
+    </ul>
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+            news:[
+                {id:22, title:"title01"},
+                {id:88, title:"title02"},
+            ]
+        }
+    });
+</script>
+</body>
+</html>

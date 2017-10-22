@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+
+<v1>v-show对比v-if. v-show性能要好一些</v1>
+<hr>
+
+<div id="app">
+
+    <input type="checkbox" v-model="status"> 是否展示 <br>
+    <h1 v-if="status">v-if会真正把dom删除/添加</h1>
+    <h1 v-show="status">v-show使用display控制是否展示</h1>
+
+
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+            status : true
+        }
+    });
+</script>
+</body>
+</html>

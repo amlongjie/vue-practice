@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+
+<h1>watch监听变量变化</h1>
+<hr>
+
+
+<div id="app">
+
+    <input type="text" v-model="word"><br>
+    {{ changeLog }}
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        watch: {
+            word(newV, oldV){
+                this.changeLog = oldV + "=>" + newV
+                // 此处发异步请求
+            }
+        },
+        data: {
+            word: '',
+            changeLog:''
+        }
+    });
+</script>
+</body>
+</html>
