@@ -7,11 +7,18 @@
 </head>
 <body>
 
-<h1>变异方法Push</h1>
+<h1>变异方法Push实现评论功能</h1>
 <hr>
 
 <div id="app">
+    <ul>
+        <li v-for="comment in comments">
+            {{ comment }}
+        </li>
+    </ul>
 
+    <textarea name="" id="" cols="30" rows="10" v-model="curComment"></textarea><br>
+    <button type="button" v-on:click="push">发表</button>
 
 </div>
 
@@ -20,6 +27,17 @@
         // element
         el: '#app',
         data: {
+            curComment: "",
+            comments: [
+                "comment01",
+                "comment02"
+            ]
+        },
+        methods: {
+            push(){
+                this.comments.push(this.curComment);
+                this.curComment = "";
+            }
         }
     });
 </script>
