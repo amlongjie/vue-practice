@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+
+<h1>发表/删除评论到最前/最后</h1>
+<hr>
+
+<div id="app">
+    <ul>
+        <li v-for="comment in comments">
+            {{ comment }}
+        </li>
+    </ul>
+
+    <textarea name="" id="" cols="30" rows="10" v-model="curComment"></textarea><br>
+    <button type="button" v-on:click="push('start')">发表到最前面</button>
+    <button type="button" v-on:click="push('end')">发表到最后面</button>
+    <br>
+    <button type="button" v-on:click="del('start')">删除最前</button>
+    <button type="button" v-on:click="del('end')">删除最后</button>
+
+
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+            curComment: "",
+            comments: [
+                "comment01",
+                "comment02"
+            ]
+        },
+        methods: {
+            push(pos){
+                switch (pos){
+                    case "start":
+                        this.comments.unshift(this.curComment);
+                        break;
+                    case "end":
+                        this.comments.push(this.curComment);
+                        break;
+                }
+                this.curComment = "";
+            },
+
+            del(pos){
+                switch (pos){
+                    case "start":
+                        this.comments.shift();
+                        break;
+                    case "end":
+                        this.comments.pop();
+                        break;
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
