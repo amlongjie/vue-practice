@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+
+<h1>排序和反转</h1>
+<hr>
+
+<div id="app">
+    <ul>
+        <li v-for="(comment, index) in comments">
+            {{ comment.id }} - {{ comment.comment }} <button type="button" v-on:click="delByIndex(index)">删除</button>
+        </li>
+    </ul>
+
+    <textarea name="" id="" cols="30" rows="10" v-model="curComment"></textarea><br>
+    <button type="button" v-on:click="push('start')">发表到最前面</button>
+    <button type="button" v-on:click="push('end')">发表到最后面</button>
+    <br>
+    <button type="button" v-on:click="del('start')">删除最前</button>
+    <button type="button" v-on:click="del('end')">删除最后</button>
+    <br>
+    <button type="button" v-on:click="sort()">按id升序排序</button>
+    <button type="button" v-on:click="reverse()">反转列表</button>
+    <br>
+    <input type="text" v-model="searchComment">
+    <button type="button" v-on:click="search()">搜索</button>
+
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+            curComment: "",
+            searchComment: "",
+            curId: 3,
+            comments: [
+                {id:1, comment: "comment01"},
+                {id:3, comment: "comment03"},
+                {id:2, comment: "comment02"},
+            ]
+        },
+        methods: {
+            push(pos){
+                d = {id: ++this.curId, comment:this.curComment};
+                switch (pos){
+                    case "start":
+                        this.comments.unshift(d);
+                        break;
+                    case "end":
+                        this.comments.push(d);
+                        break;
+                }
+                this.curComment = "";
+            },
+
+            del(pos){
+                switch (pos){
+                    case "start":
+                        this.comments.shift();
+                        break;
+                    case "end":
+                        this.comments.pop();
+                        break;
+                }
+            },
+
+            delByIndex(index) {
+                this.comments.splice(index, 1);
+            },
+            sort() {
+                this.comments.sort((a, b) => a.id > b.id);
+            },
+            reverse() {
+                this.comments.reverse();
+            },
+            search() {
+                alert(this.searchComment);
+
+                this.comments =  this.comments.filter(comment => {
+                    reg = new RegExp(this.searchComment);
+                    return reg.test(comment.comment);
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -18,3 +18,6 @@
 16. v-for & computed 实现奇偶数展示
 17. 变异方法:push实现留言板
 18. 变异方法:unshift&pop&shift 实现最前/最后 发表/删除 评论
+19. 变异方法:splice删除指定评论
+20. 变异方法:sort/reverse进行评论的排序与反转
+21. 变异方法:filter 配合 正则表达式 实现搜索评论
