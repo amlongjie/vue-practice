@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<h1>排序和反转</h1>
+<h1>filter & reg 实现搜索</h1>
 <hr>
 
 <div id="app">
@@ -26,6 +26,9 @@
     <br>
     <button type="button" v-on:click="sort()">按id升序排序</button>
     <button type="button" v-on:click="reverse()">反转列表</button>
+    <br>
+    <input type="text" v-model="searchComment">
+    <button type="button" v-on:click="search()">搜索</button>
 
 </div>
 
@@ -76,6 +79,14 @@
             },
             reverse() {
                 this.comments.reverse();
+            },
+            search() {
+                alert(this.searchComment);
+
+                this.comments =  this.comments.filter(comment => {
+                    reg = new RegExp(this.searchComment);
+                    return reg.test(comment.comment);
+                });
             }
         }
     });
