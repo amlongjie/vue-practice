@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+
+<h1>事件修饰符stop&self&capture</h1>
+<hr>
+
+<div id="app">
+    <div @click="divAlert" style="border: 1px solid red;">
+        div1
+        <a href="http://www.baidu.com" @click.prevent="preventLink">div1/a都有点击事件.点击按钮的时候会有冒泡现象</a>
+    </div>
+    <br>
+    <div @click="divAlert" style="border: 1px solid red;">
+        div2
+        <a href="http://www.baidu.com" @click.prevent.stop="preventLink">a使用stop事件修饰符stop,阻止冒泡现象</a>
+    </div>
+    <br>
+    <div @click.self="divAlert" style="border: 1px solid red;">
+        div3
+        <a href="http://www.baidu.com" @click.prevent="preventLink">div3使用事件修饰符self.只有当点击div而不是a的时候div才会alert</a>
+    </div>
+    <br>
+    <div @click.capture="divAlert" style="border: 1px solid red;">
+        div4
+        <a href="http://www.baidu.com" @click.prevent="preventLink">div4使用事件修饰符capture.只要点击div的区域会先alert div.再传递到下一层的a</a>
+    </div>
+
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+        },
+        methods: {
+            preventLink(){
+                alert("a alert");
+            },
+            divAlert(){
+                alert("div alert");
+            }
+        }
+    });
+</script>
+</body>
+</html>

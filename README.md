@@ -21,3 +21,7 @@
 19. 变异方法:splice删除指定评论
 20. 变异方法:sort/reverse进行评论的排序与反转
 21. 变异方法:filter 配合 正则表达式 实现搜索评论
+22. 事件的基本使用
+23. 事件修饰符$event & prevent修饰符操作表单
+24. 事件修饰符stop & self & capture
+25. 事件修饰符once

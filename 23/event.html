@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+
+<h1>$evnet & 事件修饰符prevent</h1>
+<hr>
+
+<div id="app">
+    <a href="http://www.baidu.com" @click="preventLink($event)">使用event禁止跳转到百度</a>
+    <br>
+    <a href="http://www.baidu.com" @click.prevent="preventLink2">使用事件描述符.prevent禁止跳转到百度【功能等同于event.preventDefault()禁止默认行为】</a>
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+        },
+        methods: {
+            preventLink(event){
+                // 禁止跳转到baidu
+                event.preventDefault();
+                alert("你不能跳转到baidu.com");
+            },
+            preventLink2(){
+                alert("你不能跳转到baidu.com");
+            }
+
+        }
+    });
+</script>
+</body>
+</html>

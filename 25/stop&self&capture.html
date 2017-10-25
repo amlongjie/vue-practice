@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+</head>
+<body>
+
+<h1>事件修饰符once,只生效一次.</h1>
+<hr>
+
+<div id="app">
+    <a href="http://www.baidu.com" @click.prevent.once="preventLink">@click.prevent.once 点击a标签取消默认行为只会生效一次</a>
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+        },
+        methods: {
+            preventLink(){
+                alert("a alert");
+            }
+        }
+    });
+</script>
+</body>
+</html>
