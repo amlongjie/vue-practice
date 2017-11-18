@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+<h1>组件通信 - 父亲到儿子</h1>
+<hr>
+
+<div id="app">
+
+    <h2>父组件的数据需要通过prop下发到子组件</h2>
+    <b>静态prop数据的传递:</b>
+    <static-prop-component message="我是static prop"></static-prop-component><br>
+    <b>v-bind,动态绑定父组件数据:</b><br>
+    父亲: <input type="text" v-model="parentMsg">{{parentMsg}}<br>
+    儿子: <d-prop-component :message="parentMsg"></d-prop-component><br>
+    说明: 子组件的prop属性要和组件的属性名一直.<br>
+    静态的动态的区别.就是数据来源是可变还是不可变.<br>
+    可变的使用v-bind.不可变的直接绑定即可
+    <hr>
+
+    <h2>绑定整个prop对象.而非各个属性</h2>
+    如果你想把一个对象的所有属性作为prop进行传递,则可以使用不带任何参数的v-bind<br>
+    <b>例如:</b><total-prop-component v-bind="todo"></total-prop-component>
+    <hr>
+
+    <h2>字面量语法 vs 动态语法[表达式]</h2>
+    当我们进行prop绑定的时候,如果没有指定是js表达式,则会绑定成字符串字面量. 比如上面的静态绑定<br>
+    如果我们想在prop里写上1+2而页面上显示3.则需要使用v-bind.<br>
+    <b>计算1+2=</b> <static-prop-component :message="1+2"></static-prop-component><br>
+    <hr>
+    <h2>单向数据流</h2>
+    Prop是单向绑定的,父组件的属性变化时,将传递给子组件.如上面的动态绑定父组件数据. 但是反过来不会 <br>
+    每次父组件的状态更新,子组件的所有prop都会更新为最新值.<br>
+    父亲修改更新儿子: <input type="text" v-model="parentMsg">{{parentMsg}}<br>
+    儿子修改不更新父亲: <d-prop-component2 :message="parentMsg"></d-prop-component2><br>
+    每次父组件的状态更新,子组件的所有prop都会更新为最新值.这意味着不应该在子组件内部修改prop.否则会报错.如下面这个例子<br><br>
+    父亲:{{parentMsg}}<br>
+    儿子:<d-prop-component3 :message="parentMsg"></d-prop-component3><br>
+
+    <h2>prop验证</h2>
+
+    https://cn.vuejs.org/v2/guide/components.html#Prop-验证
+
+
+</div>
+
+<script type="text/x-template" id="staticPropTemplate">
+    <span>{{message}}</span>
+</script>
+
+<script type="text/x-template" id="dPropTemplate">
+    <span>{{message}}</span>
+</script>
+
+<script type="text/x-template" id="totalPropTemplate">
+    <span>{{text}} | {{isComplete}}</span>
+</script>
+
+<script type="text/x-template" id="dPropTemplat2">
+    <input v-model="message">
+</script>
+
+<script type="text/x-template" id="dPropTemplat3">
+    <button @click="modify(message)">我只是一个按钮</button>
+</script>
+<script>
+
+    staticPropComponent = {
+        template: "#staticPropTemplate",
+        props: ['message']
+    };
+
+    dPropComponent = {
+        template: '#dPropTemplate',
+        props: ['message']
+    };
+
+    totalPropComponent = {
+        template: "#totalPropTemplate",
+        props: ['text', 'isComplete']
+    };
+
+    dPropComponent2 = {
+        template: '#dPropTemplat2',
+        props: ['message']
+    };
+
+    dPropComponent3 = {
+        template: '#dPropTemplat3',
+        props: ['message'],
+        methods: {
+            modify(mes){
+                this.message = "aaa";
+            }
+        }
+    };
+
+    var app = new Vue({
+        el: "#app",
+        components: {
+            staticPropComponent, dPropComponent, totalPropComponent,dPropComponent2
+            ,dPropComponent3
+        },
+        data: {
+            parentMsg: "init parent message",
+            todo : {
+                text: '我是一个todo',
+                isComplete: true,
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

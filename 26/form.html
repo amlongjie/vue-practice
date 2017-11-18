@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+<h1>常用表单</h1>
+<hr>
+
+<div id="app">
+    <form action="">
+        <h2>input-text</h2>
+        <input type="text" v-model="title">
+        <hr>
+        <h2>text-area</h2>
+        <textarea v-model="content"></textarea>
+        <hr>
+        <h2>checkbox - 只有单选的情况</h2>
+        <input type="checkbox" v-model="draft">  true|false {{ draft }}
+        <hr>
+
+        <h2>checkbokx - 静态多选框</h2>
+        <input type="checkbox" v-model="flag" value="0"> 静态多选框一
+        <input type="checkbox" v-model="flag" value="1"> 静态多选框二
+        | 结果:{{flag}}
+        <hr>
+
+        <h2>checkbokx - 动态多选框</h2>
+        <span v-for="ch in d_checkbox">
+            <input type="checkbox" v-model="d_flag" :value="ch.key"> {{ch.value}}
+        </span>
+        | 结果 {{d_flag}}
+        <hr>
+
+        <h2>radio - 静态单选框</h2>
+        <input type="radio" value="radio1" v-model="type"> radio1
+        <input type="radio" value="radio2" v-model="type"> radio2
+        | 结果: {{type}}
+        <hr>
+
+        <h2>radio - 动态单选框</h2>
+        <span v-for="dtype in d_type">
+            <input type="radio" :value="dtype.key" v-model="d_type_flag"> {{dtype.value}}
+        </span>
+        | 结果: {{d_type_flag}}
+        <hr>
+
+
+        <h2>select - 静态列表项</h2>
+        <select v-model="cid">
+            <option disabled value="">请选择</option>
+            <option value="0">dev</option>
+            <option value="1">test</option>
+        </select>
+        | 结果 {{ cid }}
+        <hr>
+
+        <h2>select - 动态列表项</h2>
+        <select v-model="cid">
+            <option disabled value="">请选择</option>
+            <option v-for="c in cat" :value="c.cid">{{c.t}}</option>
+        </select>
+        | 结果 {{ cid }}
+        <hr>
+
+
+    </form>
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+            title: "我是标题",
+            content: "我是内容",
+            draft: false,
+            d_checkbox:[
+                {key: 0, value:"check box 1"},
+                {key: 1, value:"check box 2"}
+            ],
+            d_flag:[],
+            type: "radio1",
+            d_type:[
+                {key: 0, value:"动态单选一"},
+                {key: 1, value:"动态单选二"},
+            ],
+            d_type_flag:"",
+            cid:"",
+            cat: [
+                {cid:"0", t:"localhost"},
+                {cid:"1", t:"test.sikuai"},
+            ],
+            flag:[]
+        },
+        methods: {
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+<h1>组件定义 & 模板约束 & 组件使用</h1>
+<hr>
+
+<div id="app">
+    <h2>组件定义的两种方式</h2>
+    <bo-header></bo-header>
+    <bo-body></bo-body>
+    <hr>
+
+    <h2>组件里的template必须有一个父级</h2>
+    也就是说,如果有两个并且的标签.则要扔到一个父级里.比如div
+    <hr>
+
+    <h2>组件中的data必须为函数</h2>
+    Vue实例传入的各种选项大多数都可以在组件里使用.是有data必须是函数.<br>
+    原因是:如果多个组件绑定同一个data,会共享data,导致组件之间相互影响.<br>
+    <b>data共享的组件</b>:<share-counter></share-counter><share-counter></share-counter><br>
+    <b>data不共享的组件</b>:<no-share-counter></no-share-counter><no-share-counter></no-share-counter>
+    <hr>
+
+    <h2>Dom模板解析注意事项</h2>
+    当使用Dom作为模板时,可能会收到一些HTML的限制.
+    因为Vue只有在浏览器解析,规范化模板<b>之后</b>.才能获取内容.比如div<br>
+    <b>使用span模板:</b><use-dom-template></use-dom-template><br>
+
+    <b>使用x-template可以规避这个问题:</b><x-template></x-template><hr>
+
+
+</div>
+
+<div id="domTemplate">
+    <span>{{str}}</span>
+</div>
+
+<script type="text/x-template" id="xTemplate">
+    <span>{{str}}</span>
+</script>
+
+<script>
+
+    // 全局组件定义,要放在app前面.
+    Vue.component("boHeader", {
+        template: "<div>全局组件定义:header</div>"
+    });
+
+    boComponent = {
+      template: "<div>局部组件定义:body</div>"
+    };
+
+    let sharedCountHolder = {
+        counter: 0
+    };
+
+    shareDataComponent = {
+        template: "<button @click='counter += 1'>{{counter}}</button>",
+        data(){
+            return sharedCountHolder;
+        }
+    };
+
+    noShareDataComponent = {
+        template: "<button @click='counter += 1'>{{counter}}</button>",
+        data(){
+            return {
+                counter:0
+            }
+        }
+    };
+
+    useDomTemplate = {
+        template: "#domTemplate",
+        data(){
+            return {
+                str: "domTemplate"
+            }
+        }
+    };
+
+    xTemplate = {
+        template: "#xTemplate",
+        data(){
+            return {
+                str: "xTemplate"
+            }
+        }
+    };
+
+    var app = new Vue({
+        el:"#app",
+        components: {
+            boBody: boComponent,
+            shareCounter: shareDataComponent,
+            noShareCounter: noShareDataComponent,
+            useDomTemplate:useDomTemplate,
+            xTemplate: xTemplate
+        }
+    });
+
+</script>
+</body>
+</html>

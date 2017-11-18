@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+<h1>表单修饰符</h1>
+<hr>
+
+<div id="app">
+    <form action="">
+        <h2>.number测试</h2>
+        <input type="text" v-model.number="number">
+        | .number作用: 当输入框中为纯数字的时候,则为number类型.否则为string类型
+        <hr>
+
+        <h2>.trim测试</h2>
+        <input type="text" v-model.trim="title">
+        | .trim: 前后空格不会绑定到模型中.
+        <hr>
+
+        <h2>.lazy测试</h2>
+        <input type="text" v-model.lazy="title02"> | value:{{title02}} | .lazy: 等待焦点失去,再进行绑定
+        <hr>
+
+
+
+    </form>
+</div>
+
+<script>
+    var app = new Vue({
+        // element
+        el: '#app',
+        data: {
+            number:"",
+            title: "",
+            title02: ""
+        },
+        methods: {
+        },
+        watch:{
+            number: function (val) {
+                console.log(typeof(val));
+            },
+            title: function (val) {
+                console.log(val);
+            },
+        }
+    });
+
+</script>
+</body>
+</html>

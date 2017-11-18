@@ -25,3 +25,7 @@
 23. 事件修饰符$event & prevent修饰符操作表单
 24. 事件修饰符stop & self & capture
 25. 事件修饰符once
+26. 常用表单
+27. 表单修饰符 .number | .trim | .lazy
+28. 组件定义 & 模板约束 & 组件使用
+29. 父组件向子组件传递信息:prop
