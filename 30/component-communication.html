@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+<h1>组件通信 - 儿子到父亲</h1>
+<hr>
+
+<div id="app">
+
+    <h2>使用$emit向父组件传递消息</h2>
+    说明:子组件中通过使用$emit来呼叫自定义事件. <br>
+    比如: this.$emit("increment"), 则组件上的 @increment="父组件调用的方法名" <br>
+    父亲的count:{{count}} <br>
+    组件一:
+    <count-button-component @increment="increaseCount"></count-button-component>
+    <br>
+    组件二:
+    <count-button-component @increment="increaseCount"></count-button-component>
+    <hr>
+
+    <h2>子组件通过同步数据给父组件实现购物车</h2>
+    <sale-card-component :sallist="fatherSaleList"></sale-card-component>
+    总价格: {{totalPrice}}
+
+</div>
+
+<script type="text/x-template" id="buttonTemplate">
+    <button type="button" @click="countPlus">{{count}}</button>
+</script>
+
+<script type="text/x-template" id="saleCardTemplate">
+    <table border="1">
+        <tr>
+            <th>商品名</th>
+            <th>单价</th>
+            <th>数量</th>
+        </tr>
+        <tr v-for="product in sallist">
+            <td>{{product.title}}</td>
+            <td>{{product.price}}</td>
+            <td><input v-model="product.num"></td>
+        </tr>
+    </table>
+</script>
+
+<script>
+
+    countButtonComponent = {
+        template: '#buttonTemplate',
+        data() {
+            return {
+                count: 0
+            }
+        },
+        methods: {
+            countPlus() {
+                this.count += 1;
+                this.$emit("increment");
+            }
+        }
+    };
+
+    saleCardComponent = {
+        template: "#saleCardTemplate",
+        props: ['sallist']
+    };
+
+    var app = new Vue({
+        el: "#app",
+        components: {
+            countButtonComponent,saleCardComponent
+        },
+        data: {
+            count: 0,
+            fatherSaleList: [
+                {title: 'iPhone', price: 5000, num: 1},
+                {title: '坚果', price: 1200, num: 1}
+            ]
+        },
+        computed: {
+            totalPrice(){
+                total = 0;
+                this.fatherSaleList.forEach((v) => {
+                    total += v.price * v.num;
+                });
+                return total;
+            }
+        },
+        methods: {
+            increaseCount() {
+                this.count += 1;
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
